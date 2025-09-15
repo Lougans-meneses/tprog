@@ -7,6 +7,7 @@ import java.util.Date;
 public class Main {
     public static void main(String[] args) {
 
+/*
         //data atual
         LocalDate dataAtual = LocalDate.now();
 
@@ -19,7 +20,7 @@ public class Main {
         System.out.println(dataHoraAtual);
 
         //LocalDate dataAniversarioGuilherme = LocalDate.parse("1994-02-16");
-        LocalDate dataAniversarioGuilherme = LocalDate.of(1994, 2, 16);
+
         System.out.println(dataAniversarioGuilherme);
         LocalTime horario = LocalTime.of(19, 30);
 
@@ -37,6 +38,29 @@ public class Main {
         System.out.println("Lisboa " + lisboa);
 
         System.out.println(LocalDateTime.now(ZoneId.of("Europe/Lisbon")));
+*/
+
+        //LocalDate ou LocalTime = Data literal formatada
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        DateTimeFormatter formatterDataEHora = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+        formatter.format(LocalDate.now());
+        LocalDate dataAniversarioGuilherme = LocalDate.of(1994, 2, 16);
+        LocalDate dataNascimentoAlex = LocalDate.parse("19/10/1987", formatter);
+
+        LocalTime inicio = LocalTime.of(8, 0);
+        LocalTime fim = LocalTime.of(18, 0);
+
+        //Duration
+        Duration duration = Duration.between(inicio, fim);
+        System.out.println(duration);
+        System.out.println("Em horas " + duration.toHours());
+        System.out.println("Em minutos " + duration.toMinutes());
+
+        //Period
+        Period period = Period.between(dataNascimentoAlex, dataAniversarioGuilherme);
+        System.out.printf("\nDiferença em anos %d", period.getYears());
+
+
 
 
     }
