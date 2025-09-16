@@ -1,67 +1,77 @@
-import java.text.DateFormat;
-import java.time.*;
-import java.time.format.DateTimeFormatter;
-import java.util.Calendar;
-import java.util.Date;
+import ada.tech.exemplo.Animal;
+import ada.tech.exemplo.Operacao;
+import ada.tech.exemplo.VerificaSaltador;
+import ada.tech.exemplo.Verificador;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
 
-/*
-        //data atual
-        LocalDate dataAtual = LocalDate.now();
+        // lista de animais
+        List<Animal> animais = new ArrayList<>();
+        animais.add(new Animal("peixe", false, true));
+        animais.add(new Animal("canguru", true, false));
+        animais.add(new Animal("coelho", true, false));
+        animais.add(new Animal("tartaruga", false, true));
 
-        //hora atual
-        LocalTime horaAtual = LocalTime.now();
-
-        //data e hora
-        LocalDateTime dataHoraAtual = LocalDateTime.now();
-
-        System.out.println(dataHoraAtual);
-
-        //LocalDate dataAniversarioGuilherme = LocalDate.parse("1994-02-16");
-
-        System.out.println(dataAniversarioGuilherme);
-        LocalTime horario = LocalTime.of(19, 30);
-
-        LocalDate novaData = dataAniversarioGuilherme.plusDays(4);
-
-        System.out.println(DateTimeFormatter.ofPattern("dd/MM/yyyy").format(dataAniversarioGuilherme));
-        System.out.println(dataAniversarioGuilherme.getDayOfWeek());
-        System.out.println(DateTimeFormatter.ofPattern("dd/MM/yyyy").format(novaData));
+        // imprime os animais verificados
+        //imprimir(animais, new VerificaSaltador());
+        imprimir(animais, Animal::podeSaltar);
+        imprimir(animais, Animal::podeNadar);
 
 
-        ZonedDateTime saoPaulo = ZonedDateTime.of(dataHoraAtual, ZoneId.of("America/Sao_Paulo"));
-        ZonedDateTime lisboa = ZonedDateTime.of(dataHoraAtual, ZoneId.of("Europe/Lisbon"));
+        Comparator<String> comp = (s1, s2) -> s1.length() - s2.length();
+        List<String> strings = List.of("","");
+        //Collections.sort(strings, comp);
 
-        System.out.println("Sao Paulo " + saoPaulo);
-        System.out.println("Lisboa " + lisboa);
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                System.out.println("Hello World");
+                System.out.println("Hello World");
+                System.out.println("Hello World");
+                System.out.println("Hello World");
+                System.out.println("Hello World");
+            }
+        });
 
-        System.out.println(LocalDateTime.now(ZoneId.of("Europe/Lisbon")));
-*/
+        new Thread(() -> {
+                System.out.println("Hello World");
+                System.out.println("Hello World");
+                System.out.println("Hello World");
+                System.out.println("Hello World");
+                System.out.println("Hello World");
+                System.out.println("Hello World");
+        });
 
-        //LocalDate ou LocalTime = Data literal formatada
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        DateTimeFormatter formatterDataEHora = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
-        formatter.format(LocalDate.now());
-        LocalDate dataAniversarioGuilherme = LocalDate.of(1994, 2, 16);
-        LocalDate dataNascimentoAlex = LocalDate.parse("19/10/1987", formatter);
+        //(parametros) -> expressao
+        //(parametros) -> { bloco de codigo }
 
-        LocalTime inicio = LocalTime.of(8, 0);
-        LocalTime fim = LocalTime.of(18, 0);
+        Operacao soma = (a, b) -> a + b;
+        Operacao multiplicacao = (a, b) -> a * b;
 
-        //Duration
-        Duration duration = Duration.between(inicio, fim);
-        System.out.println(duration);
-        System.out.println("Em horas " + duration.toHours());
-        System.out.println("Em minutos " + duration.toMinutes());
+        System.out.printf("\nSoma eh %d", soma.executar(10, 2));
+        System.out.printf("\nA multiplicacao eh %d", multiplicacao.executar(10, 2));
 
-        //Period
-        Period period = Period.between(dataNascimentoAlex, dataAniversarioGuilherme);
-        System.out.printf("\nDiferença em anos %d", period.getYears());
-
-
-
-
+        calcular(32,5, (a, b) -> a - b);
     }
+
+    private static void calcular(int a, int b, Operacao op) {
+        System.out.printf("\nResultado da operacao eh %d", op.executar(a, b));
+    }
+
+    private static void imprimir(List<Animal> animais, Verificador verificador) {
+        for (Animal animal : animais) {
+            // verificando
+            if (verificador.verificar(animal)) {
+                System.out.print(animal + " ");
+            }
+        }
+        System.out.println();
+    }
+
 }
