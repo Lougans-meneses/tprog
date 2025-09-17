@@ -1,12 +1,12 @@
 import ada.tech.exemplo.Animal;
 import ada.tech.exemplo.Operacao;
-import ada.tech.exemplo.VerificaSaltador;
 import ada.tech.exemplo.Verificador;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.function.Consumer;
+import java.util.function.Predicate;
 
 public class Main {
     public static void main(String[] args) {
@@ -58,6 +58,31 @@ public class Main {
         System.out.printf("\nA multiplicacao eh %d", multiplicacao.executar(10, 2));
 
         calcular(32,5, (a, b) -> a - b);
+
+        //PREDICATE
+        int numero = -4;
+        boolean isPar = numero % 2 == 0 ? true : false;
+        Predicate<Integer> isParPredicate = (n) -> n % 2 == 0;
+        Predicate<Integer> isNotNegative = (n) -> n > 0;
+        System.out.printf("\nO numero %d eh primo eh negativo %b", numero,
+                isParPredicate.and(isNotNegative).negate().test(numero));
+
+        //CURIOSIDADE JAVA
+        //condicao 1 && condicao 2
+        //condicao 1 &  condicao 2
+
+        /* List<String> lista = null;
+            if(lista != null & lista.size() > 0) {
+
+            }
+        */
+
+        //CONSUMER
+        Consumer<String> consumer = (nome) -> System.out.printf("\nMeu nome eh %s", nome.toUpperCase());
+        Consumer<String> consumerAfter = (nome) -> System.out.printf("\nMeu nome eh %s", nome.replace("x", "xandre"));
+        consumer.andThen(consumerAfter).accept("Alex");
+
+
     }
 
     private static void calcular(int a, int b, Operacao op) {
