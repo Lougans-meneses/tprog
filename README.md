@@ -1,9 +1,12 @@
 # Exercícios de Lambdas e Programação Funcional em Java
 
 ## Exercício 1
-Crie uma interface funcional `Operacao` com um método `executar(int a, int b)` que retorne um inteiro.  
-Implemente duas operações utilizando **lambdas**: uma soma e uma subtração.  
-Depois, crie uma classe principal para executar ambas as operações.
+Crie uma interface funcional chamada `Conversor` com um método `String converter(String texto)`.  
+Implemente duas conversões usando **lambdas**:  
+- Converter o texto para **maiúsculas**.  
+- Inverter os caracteres de uma string.  
+
+Na classe principal, teste as duas implementações com diferentes textos.
 
 ---
 
