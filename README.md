@@ -1,4 +1,4 @@
-# Exercícios de Lambdas e Programação Funcional em Ja
+# Exercícios de Lambdas e Programação Funcional em Java
 
 ## Exercício 1
 Crie uma interface funcional `Operacao` com um método `executar(int a, int b)` que retorne um inteiro.  
