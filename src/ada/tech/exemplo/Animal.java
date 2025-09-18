@@ -16,4 +16,11 @@ public class Animal {
     public boolean podeNadar() { return podeNadar; }
     public String toString() { return especie; }
 
+    public String getEspecie() {
+        return especie;
+    }
+
+    public void setEspecie(String especie) {
+        this.especie = especie;
+    }
 }
