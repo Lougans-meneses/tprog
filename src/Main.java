@@ -123,32 +123,54 @@ public class Main {
                 totalPrecos);*/
 
         //findFirst e FindAny
-        animais.stream()
+     /*   animais.stream()
                 .filter(Animal::podeSaltar)
-                .findFirst().ifPresent(System.out::println);
+                .findFirst().ifPresent(System.out::println);*/
 
-        //TODO - Trazer exemplo para a turma
-        animais.parallelStream()
-                .filter(Animal::podeSaltar)
-                .findAny().ifPresent(System.out::println);
+        //FindAny
+     /*   animais.parallelStream()
+                //.filter(Animal::podeSaltar)
+                .findAny().ifPresent(System.out::println);*/
 
         //allMatch
-        System.out.printf("\nTodos animais podem saltar %b",
-                animais.stream().allMatch(Animal::podeSaltar));
+       /* System.out.printf("\nTodos animais podem saltar %b",
+                animais.stream().allMatch(Animal::podeSaltar));*/
 
         //anyMatch
-        System.out.printf("\nAlgum animal pode saltar %b",
-                animais.stream().anyMatch(Animal::podeSaltar));
+       /* System.out.printf("\nAlgum animal pode saltar %b",
+                animais.stream().anyMatch(Animal::podeSaltar));*/
 
         //noneMatch
-        System.out.printf("\nNenhum animal pode saltar %b",
-                animais.stream().noneMatch(Animal::podeSaltar));
+//        System.out.printf("\nNenhum animal pode saltar %b",
+//                animais.stream().noneMatch(Animal::podeSaltar));
 
 
-        animais.parallelStream().forEach(animal -> {
-            System.out.printf("\nNome da Thread %s \n", Thread.currentThread().getName());
-            System.out.println(animal.getEspecie());
-        });
+     /*   animais.parallelStream().forEach(animal -> {
+            System.out.printf("\nNome da Thread %s - ", Thread.currentThread().getName());
+            System.out.print(animal.getEspecie());
+        });*/
+
+        List<Thread> threads = new ArrayList<>();
+        for(Animal animal : animais) {
+            Thread thread = new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    System.out.printf("\nNome da Thread %s - ", Thread.currentThread().getName());
+                    System.out.print(animal.getEspecie());
+                }
+            });
+            threads.add(thread);
+        }
+
+        for (Thread t : threads) {
+            t.start();
+            try {
+                t.join(100L);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        }
+
 
     }
 
